@@ -34,13 +34,8 @@ export { Logger, LogLevel, PerformanceMetrics, logger } from './logger.js';
 export { createWorker, IsomorphicWorker } from './worker.js';
 export type { IWorker, WorkerMessage } from './worker.js';
 
-export {
-  TX2Error,
-  SystemErrorStrategy,
-  SystemErrorContext,
-  SystemErrorHandler,
-  defaultErrorHandler,
-} from './error.js';
+export { TX2Error, SystemErrorStrategy, defaultErrorHandler } from './error.js';
+export type { SystemErrorContext, SystemErrorHandler } from './error.js';
 
 export { World } from './world.js';
 export type { WorldConfig } from './world.js';
