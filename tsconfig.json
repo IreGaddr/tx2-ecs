@@ -25,6 +25,8 @@
     "src/core/**/*",
     "src/reactive/**/*",
     "src/shared/**/*",
+    "src/client/**/*",
+    "src/server/**/*",
     "src/index.ts"
   ],
   "exclude": [
