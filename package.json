@@ -41,7 +41,7 @@
   "scripts": {
     "build": "npm run build:bundle && npm run build:types",
     "build:bundle": "node scripts/build.js",
-    "build:types": "tsc -p tsconfig.json --emitDeclarationOnly && tsc -p tsconfig.client.json --emitDeclarationOnly && tsc -p tsconfig.server.json --emitDeclarationOnly",
+    "build:types": "tsc -p tsconfig.json --emitDeclarationOnly",
     "build:core": "tsc -p tsconfig.json",
     "build:client": "tsc -p tsconfig.client.json",
     "build:server": "tsc -p tsconfig.server.json",
