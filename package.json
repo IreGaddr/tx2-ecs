@@ -1,0 +1,103 @@
+{
+  "name": "tx2-ecs",
+  "version": "0.1.0",
+  "description": "TX-2: Entity Component System framework for building fullstack web applications",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client/index.js",
+      "types": "./dist/client/index.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server/index.js",
+      "types": "./dist/server/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/core/index.js",
+      "types": "./dist/core/index.d.ts"
+    },
+    "./reactive": {
+      "import": "./dist/reactive/index.js",
+      "types": "./dist/reactive/index.d.ts"
+    },
+    "./shared": {
+      "import": "./dist/shared/index.js",
+      "types": "./dist/shared/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "npm run build:bundle && npm run build:types",
+    "build:bundle": "node scripts/build.js",
+    "build:types": "tsc -p tsconfig.json --emitDeclarationOnly && tsc -p tsconfig.client.json --emitDeclarationOnly && tsc -p tsconfig.server.json --emitDeclarationOnly",
+    "build:core": "tsc -p tsconfig.json",
+    "build:client": "tsc -p tsconfig.client.json",
+    "build:server": "tsc -p tsconfig.server.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"examples/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"examples/**/*.ts\"",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.client.json --noEmit && tsc -p tsconfig.server.json --noEmit",
+    "example:todo": "node examples/todo-app/dist/server.js",
+    "example:todo:dev": "node --loader ts-node/esm --watch examples/todo-app/server.ts",
+    "example:build": "node scripts/build-example.js",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "keywords": [
+    "ecs",
+    "entity-component-system",
+    "web-framework",
+    "fullstack",
+    "reactive",
+    "isomorphic",
+    "ssr",
+    "state-management",
+    "rendering",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IreGaddr/tx2-ecs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IreGaddr/tx2-ecs/issues"
+  },
+  "homepage": "https://github.com/IreGaddr/tx2-ecs#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
+    "@vitest/coverage-v8": "^4.0.13",
+    "@vitest/ui": "^4.0.13",
+    "esbuild": "^0.27.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "happy-dom": "^20.0.10",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.2.4"
+  }
+}
