@@ -63,9 +63,10 @@ export async function initWasm(wasmPath?: string): Promise<WasmModule> {
         initFn = module.default;
       } else {
         try {
+          // @ts-expect-error - WASM module may not exist until built
           const module = await import('@tx2/core-wasm');
           initFn = module.default;
-        } catch (e) {
+        } catch {
           throw new Error(
             'WASM module not found. Build tx2-core WASM first: cd tx2-core && ./build-wasm.sh'
           );
@@ -107,6 +108,7 @@ export class BridgeWorld {
     this.useWasm = config.useWasm ?? false;
 
     if (!this.useWasm) {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const { World } = require('../core/world.js');
       this.jsWorld = new World();
     }
@@ -291,6 +293,7 @@ export class BridgeWorld {
   }
 
   private deserializeComponent(componentId: string, data: any): Component {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { getComponentClass } = require('../core/component.js');
     const ComponentClass = getComponentClass(componentId as ComponentId);
 
@@ -355,9 +358,19 @@ export function getBenchmarkStats(useWasm: boolean): {
     };
   }
 
-  return {
-    backend: 'typescript',
-    version: require('../../package.json').version,
-    available: true,
-  };
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const packageJson = require('../../package.json');
+    return {
+      backend: 'typescript',
+      version: packageJson.version,
+      available: true,
+    };
+  } catch {
+    return {
+      backend: 'typescript',
+      version: '0.1.8',
+      available: true,
+    };
+  }
 }
