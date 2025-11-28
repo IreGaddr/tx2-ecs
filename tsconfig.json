@@ -27,6 +27,7 @@
     "src/shared/**/*",
     "src/client/**/*",
     "src/server/**/*",
+    "src/bridge/**/*",
     "src/index.ts"
   ],
   "exclude": [

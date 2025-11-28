@@ -36,6 +36,10 @@
     "./shared": {
       "import": "./dist/shared/index.js",
       "types": "./dist/shared/index.d.ts"
+    },
+    "./bridge": {
+      "import": "./dist/bridge/index.js",
+      "types": "./dist/bridge/index.d.ts"
     }
   },
   "scripts": {
@@ -45,11 +49,14 @@
     "build:core": "tsc -p tsconfig.json",
     "build:client": "tsc -p tsconfig.client.json",
     "build:server": "tsc -p tsconfig.server.json",
+    "build:wasm": "cd ../tx2-core && ./build-wasm.sh",
+    "build:with-wasm": "npm run build:wasm && npm run build",
     "dev": "tsc -p tsconfig.json --watch",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
+    "test:wasm": "npm run build:wasm && vitest run --run bridge",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "format": "prettier --write \"src/**/*.ts\" \"examples/**/*.ts\"",
